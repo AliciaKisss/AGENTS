@@ -1,3 +1,6 @@
+// Variables used by Scriptable.
+// These must be at the very top of the file. Do not edit.
+// icon-color: yellow; icon-glyph: coins;
 // Gold Watch for iPad (Scriptable app) — gold & silver in AED per gram.
 //
 // Same prices and buy signals as gold-price/ on the Mac:
