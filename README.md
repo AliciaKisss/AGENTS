@@ -12,7 +12,8 @@ than a second of work each time.
 | `screenshot-cleaner/` | Every hour | Moves screenshots older than 3 days from `~/Screenshots` to the Trash |
 
 **On iPad:** `ipad/` has Home Screen widgets for gold & silver and the ETFs
-(same prices and signals), using the free Scriptable app. See
+(same prices and signals) and a Watcher of Realms redeem code finder, using
+the free Scriptable app. See
 [ipad/README.md](ipad/README.md) for setup.
 
 ## Set up on a Mac
