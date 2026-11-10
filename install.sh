@@ -21,6 +21,8 @@ unload() {
 
 if [[ "${1:-}" == "--uninstall" ]]; then
   for a in "${AGENTS[@]}"; do unload "$a"; echo "removed schedule: $a"; done
+  rm -rf "$HOME/Applications/Gold Watch.app" "$HOME/Applications/ETF Watch.app"
+  echo "removed apps: Gold Watch, ETF Watch"
   echo
   echo "Schedules removed. Screenshots still save to ~/Screenshots; to switch back:"
   echo "  defaults write com.apple.screencapture location ~/Desktop && killall SystemUIServer"
@@ -90,6 +92,17 @@ killall SystemUIServer 2>/dev/null || true
 echo "screenshots now save to: $HOME/Screenshots"
 write_plist screenshot-cleaner clean.py '  <key>StartInterval</key><integer>3600</integer>
   <key>RunAtLoad</key><true/>'
+
+# --- Clickable apps for checking any time (Spotlight / Dock) ----------------
+APPS="$HOME/Applications"
+mkdir -p "$APPS"
+make_app() {  # app name, command to run
+  rm -rf "$APPS/$1.app"
+  osacompile -o "$APPS/$1.app" -e "do shell script \"$2 > /dev/null 2>&1 &\""
+  echo "app: $APPS/$1.app"
+}
+make_app "Gold Watch" "'$PY' '$DIR/gold-price/gold.py' --check"
+make_app "ETF Watch" "'$PY' '$DIR/stock-watch/stocks.py'"
 
 # --- swiftDialog (nicer pop-ups) ---------------------------------------------
 if [[ -x /usr/local/bin/dialog ]]; then

@@ -25,6 +25,9 @@ cd ~/AGENTS
 - makes screenshots save to `~/Screenshots`,
 - offers to install [swiftDialog](https://swiftdialog.app) for the nicer pop-ups (needs your Mac password once).
 
+- creates two apps in `~/Applications`, **Gold Watch** and **ETF Watch**, to check
+  prices any time (open them with Spotlight ⌘Space, or drag them to the Dock).
+
 Run it again any time after pulling changes. To stop everything:
 
 ```bash

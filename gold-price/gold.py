@@ -20,6 +20,7 @@ usually very close but can differ slightly (plus making charges on jewelry).
 
   python3 gold.py          # normal run (pop-up)
   python3 gold.py --quiet  # print only, no pop-up
+  python3 gold.py --check  # manual check: pop-up, but don't save to history
 """
 import csv
 import json
@@ -96,8 +97,8 @@ def show_swiftdialog(title, d, dash):
     def sig_md(name, s):
         if not s:
             return f"**{name}:** signal unavailable today"
-        return f"**{name}:** {s['label']}  \n<small>" + " · ".join(
-            l.lstrip("• ") for l in s["lines"][:2]) + "</small>"
+        return f"**{name}:** {s['label']}  \n_" + " · ".join(
+            l.lstrip("• ") for l in s["lines"][:2]) + "_"
 
     message = (
         f"### {datetime.now():%A, %d %B %Y}\n\n"
@@ -109,8 +110,8 @@ def show_swiftdialog(title, d, dash):
         f"{sig_md('Gold', d['sig_gold'])}\n\n"
         f"{sig_md('Silver', d['sig_silver'])}\n\n"
         f"---\n\n"
-        f"<small>World spot: gold ${d['gold_usd']:,.2f}/oz · silver ${d['silver_usd']:,.2f}/oz. "
-        f"{DISCLAIMER}</small>"
+        f"_World spot: gold ${d['gold_usd']:,.2f}/oz · silver ${d['silver_usd']:,.2f}/oz. "
+        f"{DISCLAIMER}_"
     )
     r = subprocess.run([
         str(DIALOG),
@@ -161,10 +162,13 @@ def main():
     g24 = per_gram_aed(gold_usd)
     silver = per_gram_aed(silver_usd)
     prev_gold, prev_silver = last_prices()
-    with HISTORY.open("a", newline="") as f:
-        csv.writer(f).writerow(
-            [datetime.now().strftime("%Y-%m-%d %H:%M"), f"{g24:.2f}", f"{silver:.2f}"]
-        )
+    # Manual checks (--check) don't save, so "since last update" always
+    # compares with the last scheduled 9 AM price.
+    if "--check" not in sys.argv:
+        with HISTORY.open("a", newline="") as f:
+            csv.writer(f).writerow(
+                [datetime.now().strftime("%Y-%m-%d %H:%M"), f"{g24:.2f}", f"{silver:.2f}"]
+            )
 
     # Refresh the weekly CSV for this year (gold_weekly_<year>.csv)
     try:

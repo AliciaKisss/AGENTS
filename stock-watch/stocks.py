@@ -209,7 +209,7 @@ def show_swiftdialog(rows):
             tops.append(f"**{t}:** {why}")
     message = (f"### {datetime.now():%A, %d %B %Y}\n\n{table}\n"
                + "\n\n".join(tops)
-               + f"\n\n<small>Full reasons, charts and news in the dashboard. {DISCLAIMER}</small>")
+               + f"\n\n_Full reasons, charts and news in the dashboard. {DISCLAIMER}_")
     r = subprocess.run([
         str(DIALOG), "--title", "Your ETFs Today",
         "--titlefont", "size=22,weight=bold",

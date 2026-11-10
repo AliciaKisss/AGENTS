@@ -50,7 +50,7 @@ def due_items(today, weekly, monthly):
 
 def show_swiftdialog(title, items, snoozed):
     rows = "\n\n".join(f"### {icon} {name}\n{covers}" for icon, name, covers in items)
-    note = "\n\n<small>⏰ Snoozed reminder</small>" if snoozed else ""
+    note = "\n\n_⏰ Snoozed reminder_" if snoozed else ""
     message = f"Time to make your report{'s' if len(items) > 1 else ''}:\n\n{rows}{note}"
     r = subprocess.run([
         str(DIALOG),
