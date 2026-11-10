@@ -10,7 +10,7 @@ set -euo pipefail
 DIR="$(cd "$(dirname "$0")" && pwd)"
 LA="$HOME/Library/LaunchAgents"
 UID_NUM="$(id -u)"
-AGENTS=(gold-price report-reminder screenshot-cleaner)
+AGENTS=(gold-price stock-watch report-reminder screenshot-cleaner)
 
 label() { echo "com.essen.$1"; }
 
@@ -68,6 +68,10 @@ EOF
 # --- Gold & silver prices: every day 9:00 AM ---------------------------------
 write_plist gold-price gold.py '  <key>StartCalendarInterval</key>
   <dict><key>Hour</key><integer>9</integer><key>Minute</key><integer>0</integer></dict>'
+
+# --- ETF watch (FWRA, IGLN, VUAA, VWRA): every day 9:05 AM ------------------
+write_plist stock-watch stocks.py '  <key>StartCalendarInterval</key>
+  <dict><key>Hour</key><integer>9</integer><key>Minute</key><integer>5</integer></dict>'
 
 # --- Report reminder: Mondays 00:01, 1st of month 00:01, and at login -------
 # Mark the current week/month as done on a fresh install so it doesn't pop up now.

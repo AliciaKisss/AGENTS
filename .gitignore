@@ -10,3 +10,4 @@ report-reminder/state.json
 gold-price/history.csv
 gold-price/dashboard.html
 gold-price/gold_weekly_*.csv
+stock-watch/dashboard.html

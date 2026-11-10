@@ -7,6 +7,7 @@ than a second of work each time.
 | Agent | When | What it does |
 |---|---|---|
 | `gold-price/` | Every day, 9:00 AM | Pop-up with 24K / 18K gold and silver prices in AED per gram, buy signals (🟢🟡🔴), a chart page, and a weekly CSV for the year |
+| `stock-watch/` | Every day, 9:05 AM | Pop-up and dashboard for the ETFs FWRA, IGLN, VUAA and VWRA: price, daily / 1-month / year changes, buy signal with reasons, 1-year chart and news links |
 | `report-reminder/` | Mondays 12:01 AM, 1st of each month 12:01 AM | Pop-up reminding you to make the weekly / monthly report, with a 1-hour snooze |
 | `screenshot-cleaner/` | Every hour | Moves screenshots older than 3 days from `~/Screenshots` to the Trash |
 
@@ -36,6 +37,8 @@ Run it again any time after pulling changes. To stop everything:
 python3 gold-price/gold.py              # show today's gold & silver pop-up now
 python3 gold-price/signals.py           # print buy signals
 open gold-price/gold_weekly_*.csv       # weekly prices for the year
+python3 stock-watch/stocks.py           # show today's ETF pop-up now
+open stock-watch/dashboard.html         # ETF dashboard
 python3 report-reminder/remind.py --test     # preview the report reminder
 python3 screenshot-cleaner/clean.py --dry-run  # see what would be trashed
 ```
