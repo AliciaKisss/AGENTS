@@ -96,13 +96,21 @@ write_plist screenshot-cleaner clean.py '  <key>StartInterval</key><integer>3600
 # --- Clickable apps for checking any time (Spotlight / Dock) ----------------
 APPS="$HOME/Applications"
 mkdir -p "$APPS"
-make_app() {  # app name, command to run
-  rm -rf "$APPS/$1.app"
-  osacompile -o "$APPS/$1.app" -e "do shell script \"$2 > /dev/null 2>&1 &\""
-  echo "app: $APPS/$1.app"
+make_app() {  # app name, command to run, icon file
+  local app="$APPS/$1.app"
+  rm -rf "$app"
+  osacompile -o "$app" -e "do shell script \"$2 > /dev/null 2>&1 &\""
+  if [[ -f "$3" ]]; then
+    cp "$3" "$app/Contents/Resources/applet.icns"
+    codesign --force --deep -s - "$app" 2>/dev/null || true  # re-sign after changing the icon
+    touch "$app"
+  fi
+  echo "app: $app"
 }
-make_app "Gold Watch" "'$PY' '$DIR/gold-price/gold.py' --check"
-make_app "ETF Watch" "'$PY' '$DIR/stock-watch/stocks.py'"
+make_app "Gold Watch" "'$PY' '$DIR/gold-price/gold.py' --check" "$DIR/icons/gold.icns"
+make_app "ETF Watch" "'$PY' '$DIR/stock-watch/stocks.py'" "$DIR/icons/etf.icns"
+# Refresh Finder/Dock so the new icons show
+killall Dock 2>/dev/null || true
 
 # --- swiftDialog (nicer pop-ups) ---------------------------------------------
 if [[ -x /usr/local/bin/dialog ]]; then
