@@ -1,0 +1,12 @@
+# macOS / Python clutter
+.DS_Store
+__pycache__/
+
+# Logs
+*.log
+
+# Personal / per-machine data (recreated automatically)
+report-reminder/state.json
+gold-price/history.csv
+gold-price/dashboard.html
+gold-price/gold_weekly_*.csv
