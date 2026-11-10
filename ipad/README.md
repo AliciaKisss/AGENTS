@@ -16,13 +16,12 @@ so this usually arrives between 9 and 10 AM.
 ## Set up (about 5 minutes)
 
 1. Install **Scriptable** from the App Store (free).
-2. Add the scripts:
-   1. On the iPad, open this folder on github.com (signed in) and open
-      `Gold Watch.js`.
-   2. Tap the **Copy raw file** button (two overlapping squares).
-   3. In Scriptable, tap **+**, paste, then tap the title at the top and
-      rename it to **Gold Watch**. Tap **Done**.
-   4. Do the same for `ETF Watch.js` and name it **ETF Watch**.
+2. Add the installer:
+   1. Copy the contents of [`Install.js`](Install.js).
+   2. In Scriptable, tap **+**, paste, rename it **Install AGENTS** and tap
+      **Done**.
+   3. Tap **Install AGENTS** to run it. It downloads **Gold Watch** and
+      **ETF Watch** into Scriptable and shows ✅ for each.
 3. Run each script once from Scriptable by tapping it. You'll see the full
    view. If it asks, allow notifications.
 4. Add the widgets:
@@ -33,8 +32,8 @@ so this usually arrives between 9 and 10 AM.
       *Gold Watch* and **When Interacting** to *Run Script*.
    4. Repeat for *ETF Watch*.
 
-To update after changes in this repo, paste the new version over the old
-script in Scriptable.
+To update after changes in this repo, run **Install AGENTS** again. This
+replaces the two scripts, so any changes you made to their settings are reset.
 
 ## Settings
 
